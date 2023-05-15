@@ -26,7 +26,7 @@ a:hover{
     box-shadow: (0,20,lavender);
 }
 
-h1{
+h1,h2{
     margin-top: 50px;
     text-align: center;
 }

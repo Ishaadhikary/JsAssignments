@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Image Rotation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="assets/main.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="carousel-container">
+        <h1>Image</h1>
+        <p id="testText">0</p>
+        <div class="img-button-section">
+          <button id="lfButton" onclick="leftClick()">
+            <img src="assets/images/leftArrow.svg" alt="Left Arrow" />
+          </button>
+          <div id="carousel-image-wrapper">
+            <img src="https://picsum.photos/id/1/500/400" alt="Image" />
+            <img src="https://picsum.photos/id/2/500/400" alt="Image" />
+            <img src="https://picsum.photos/id/3/500/400" alt="Image" />
+            <img src="https://picsum.photos/id/4/500/400" alt="Image" />
+            <img src="https://picsum.photos/id/5/500/400" alt="Image" />
+            <img src="https://picsum.photos/id/6/500/400" alt="Image" />
+          </div>
+          <button id="rtButton" onclick="rightClick()">
+            <img src="assets/images/rightArrow.svg" alt="Right Arrow" />
+          </button>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-button"></button
+          ><button class="carousel-button"></button
+          ><button class="carousel-button"></button
+          ><button class="carousel-button"></button
+          ><button class="carousel-button"></button
+          ><button class="carousel-button"></button>
+        </div>
+      </div>
+    </div>
+    <script src="assets/main.js"></script>
+  </body>
+</html>

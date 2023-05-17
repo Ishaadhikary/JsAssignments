@@ -17,10 +17,13 @@
       <div class="carousel-container">
         <h1>Image</h1>
         <p id="testText">0</p>
-        <div class="img-button-section">
-          <button id="lfButton" onclick="leftClick()">
-            <img src="assets/images/leftArrow.svg" alt="Left Arrow" />
-          </button>
+        
+       <div class="img-button-section">
+        <button id="lfButton" onclick="leftClick()">
+          <img src="assets/images/leftArrow.svg" alt="Left Arrow" />
+        </button>
+        <div class="img-flex">
+          
           <div id="carousel-image-wrapper">
             <img src="https://picsum.photos/id/1/500/400" alt="Image" />
             <img src="https://picsum.photos/id/2/500/400" alt="Image" />
@@ -29,11 +32,13 @@
             <img src="https://picsum.photos/id/5/500/400" alt="Image" />
             <img src="https://picsum.photos/id/6/500/400" alt="Image" />
           </div>
-          <button id="rtButton" onclick="rightClick()">
-            <img src="assets/images/rightArrow.svg" alt="Right Arrow" />
-          </button>
+          
         </div>
-        <div class="carousel-nav">
+        <button id="rtButton" onclick="rightClick()">
+          <img src="assets/images/rightArrow.svg" alt="Right Arrow" />
+        </button>
+      </div>
+        <div class="dot-nav">
           <button class="carousel-button"></button
           ><button class="carousel-button"></button
           ><button class="carousel-button"></button
@@ -43,6 +48,6 @@
         </div>
       </div>
     </div>
-    <script src="assets/main.js"></script>
+    <script src="assets/index.js"></script>
   </body>
 </html>

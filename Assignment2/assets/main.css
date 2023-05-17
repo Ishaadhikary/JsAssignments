@@ -16,40 +16,41 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: pink;
-  position: relative;
 }
 
 .carousel-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   justify-content: center;
-  background: green;
-  justify-content: center;
+  align-items: center;
   height: 700px
 }
-
 .img-button-section {
   display: flex;
-  justify-content: space-between;
+  height: 100%; 
+  align-self: center;
   align-items: center;
-  height: 100%;
-  background-color: aqua;
 }
+.img-flex {
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  
+}
+
 
 button {
   display: flex;
   border-radius: 50px;
   width: 50px;
   height: 50px;
-  background-color: #e9e9e9;
   border: none;
-  color: #ffffff;
   font-size: 16px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  background: none;
 }
 
 
@@ -65,11 +66,18 @@ button:hover {
 }
 #carousel-image-wrapper img{
     position: absolute;
-    top:20%;
+
+    transition: 200ms linear;
 }
 
-.carousel-nav{
+.dot-nav{
     display: flex;
     justify-content: center;
     gap:20px;
+}
+
+.dot-nav button{
+  background-color: pink;
+  width: 20px;
+  height: 20px;
 }

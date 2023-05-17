@@ -34,3 +34,7 @@ function leftClick(){
     
 
 }
+
+setInterval(function() {
+    rightClick()
+  }, 5000);

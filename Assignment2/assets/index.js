@@ -1,4 +1,7 @@
 const imgCarousel = document.querySelectorAll('#carousel-image-wrapper img');
+const dotContainer = document.querySelector('.dot-nav');
+const eachDot = Array.from(dotContainer.children);
+
 
 let curSlide = 0
 let maxSlide = imgCarousel.length -1;
@@ -18,7 +21,13 @@ function rightClick(){
     }
     imgCarousel.forEach((imgSlide,index)=>{
         imgSlide.style.transform = `translateX(${500 * (index - curSlide)}px)`;
-    })}
+        eachDot[curSlide].style.background='blue';
+        eachDot[curSlide-1].style.background='pink';
+        
+    })
+    
+
+    }
    
 
 function leftClick(){
@@ -32,9 +41,9 @@ function leftClick(){
             imgSlide.style.transform = `translateX(${500 * (index - curSlide)}px)`;
         })
     
-
 }
 
 setInterval(function() {
     rightClick()
   }, 5000);
+

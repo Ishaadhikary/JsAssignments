@@ -1,86 +1,104 @@
-
-const mainContainer = document.getElementById("main-container");
-function drawBall(x, y) {
-  const mainContainer = document.getElementById("main-container");
-  const ball_el = document.createElement("div"); //Creating div to place the ball
-  ball_el.classList.add("ball"); //Adding Css property to ball_el
-  ball_el.style.left = x + "px";
-  ball_el.style.bottom = y + "px";
-  mainContainer.appendChild(ball_el); //Adding ball_el to  main Container
-  console.log("hello");
-}
-
-quantity= parseInt(prompt('Enter the number of balls you want:'));
-const balls=[{}];
-for (let i = 0; i < quantity; i++) {
-  const ball = createBall();
-  balls.push(ball);
-  console.log(ball);
-  drawBall(ball.x, ball.y);
-  setInterval(function() {
-    moveBall(ball);
-  }, 10);
-}
-
-//For the ball to move around
-function moveBall(ball) {
-  const mainContainer = document.getElementById("main-container");
-  ball.x = ball.x + ball.dx;
-  ball.y = ball.y + ball.dy;
-  mainContainer.removeChild(document.querySelector(".ball"));
-  drawBall(ball.x, ball.y);
-  console.log("move");
-  collision(balls);
-  if (ball.x + 22 > mainContainer.offsetWidth || ball.x < 2) {
-    ball.dx *= -1;
+class BouncingBallGame {
+  constructor() {
+    this.mainContainer = document.getElementById("main-container");
+    this.balls = [];
   }
-  if (ball.y +22> mainContainer.offsetHeight || ball.y < 2) {
-    ball.dy *= -1;
+  
+  init() {
+    this.createBalls();
+    this.collision();
+    this.startGame();
+    this.collision();
   }
-}
-//Random Value for X direction
-function randomIntFromIntervalX() {
-  let minX = 0;
-  let maxX = mainContainer.offsetWidth;
-  let randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
-  return randomX;
-}
-//Random Value fro Y direction
-function randomIntFromIntevalY() {
-  let minY = 0;
-  let maxY = mainContainer.offsetHeight;
-  let randomY = Math.floor(Math.random() * (maxY - minY + 1) + minY);
-  return randomY;
-}
+  
 
-//Creating ball with random value
-function createBall(){
-let ball = {};
-ball.x = randomIntFromIntervalX();
-ball.y = randomIntFromIntevalY();
-ball.dx = Math.random();
-ball.dy = Math.random();
-return ball;  
-};
-
-
-function collision(balls) {
-  for (let i = 0; i < balls.length; i++) {
-    for (let j = i + 1; j < balls.length; j++) {
-      const ball1 = balls[i];
-      const ball2 = balls[j];
+  //Creating ball object
+  createBall() {
+    let ball = {};
+    ball.x = this.randomIntFromIntervalX();
+    ball.y = this.randomIntFromIntevalY();
+    ball.dx = Math.random();
+    ball.dy = Math.random();
+    return ball;
+  }
+  //Creating balls array containing ball object
+  createBalls() {
+    const quantity = parseInt(prompt('Enter the number of balls you want:'));
+    for (let i = 0; i < quantity; i++) {
+      const ball = this.createBall();
+      this.balls.push(ball);
+    }
+  }
+  //Starts the game
+  startGame() {
+      for (const ball of this.balls) {
+        this.drawBall(ball.x, ball.y);
+        ball.intervalId = setInterval(() => {
+          this.moveBall(ball);
+        }, 5);
+      }
+    }
+  //Drawing the ball
+  drawBall(x, y) {
+    const ball_el = document.createElement("div");//Creating a div for balls
+    ball_el.classList.add("ball");
+    ball_el.style.left = x + "px";
+    ball_el.style.bottom = y + "px";
+    this.mainContainer.appendChild(ball_el);
+    console.log("hello");
+  }
+  //For Moving the ball
+  moveBall(ball) {
+      ball.x = ball.x + ball.dx;
+      ball.y = ball.y + ball.dy;
+      this.mainContainer.removeChild(document.querySelector(".ball"));//To remove the previous ball
+      this.drawBall(ball.x, ball.y);
+      console.log("move");
+      this.collision();//to Check the collision between the balls
+      //To check the collision on the container wall
+      if (ball.x+19> this.mainContainer.offsetWidth || ball.x < 0) {
+        ball.dx *= -1;
+      }
+      if (ball.y+19>this.mainContainer.offsetHeight || ball.y < 0) {
+        ball.dy *= -1;
+      }
+    }
+  //Random Values for x
+  randomIntFromIntervalX() {
+    let minX = 0;
+    let maxX = this.mainContainer.offsetWidth - 2;
+    return Math.floor(Math.random() * (maxX - minX + 1) + minX);
+  }
+  
+  //Random Values for y
+  randomIntFromIntevalY() {
+    let minY = 0;
+    let maxY = this.mainContainer.offsetHeight - 2;
+    return Math.floor(Math.random() * (maxY - minY + 1) + minY);
+  }
+  
+  collision() {
+    for (let i = 0; i < this.balls.length; i++) {
+      for (let j = i + 1; j < this.balls.length; j++) {
+        const ball1 = this.balls[i];
+        const ball2 = this.balls[j];
       
-      const dx = ball2.x - ball1.x;
-      const dy = ball2.y - ball1.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+        const dx = ball2.x - ball1.x;
+        const dy = ball2.y - ball1.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
       
-      if (distance < 20) { 
-        // Reverse the direction of both balls
-        ball1.dx *= -1;
-        ball1.dy *= -1;
-        ball2.dx *= -1;
-        ball2.dy *= -1;
+        if (distance < 19) { 
+          // Reverse the direction of both balls
+          ball1.dx *= -1;
+          ball1.dy *= -1;
+          ball2.dx *= -1;
+          ball2.dy *= -1;
+        }
       }
     }
   }
 }
+
+// Playing Game:
+const game = new BouncingBallGame();
+game.init();

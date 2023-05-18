@@ -23,8 +23,8 @@ body{
     position:relative;
     background:rgb(244, 245, 215) ;
     border: 1px solid black;
-    width: 400px;
-    height: 600px;
+    width: 600px;
+    height: 1000px;
     
 }
 
@@ -37,5 +37,4 @@ body{
     position: absolute;
     bottom:20px;
     left: 20px;
-
 }

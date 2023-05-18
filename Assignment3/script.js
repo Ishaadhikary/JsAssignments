@@ -1,16 +1,5 @@
-// class BallBounsingGame{
-//   constructor(x,y,dx,dy){
-//     this.x=x;
-//     this.y=y;
-//     this.dx=dx;
-//     this.dy=dy;
-//   }
-//   drawBall(x,y);
-//   setInterval(moveBall, time);
-//   moveBall(x,y);
 
-// }
-
+const mainContainer = document.getElementById("main-container");
 function drawBall(x, y) {
   const mainContainer = document.getElementById("main-container");
   const ball_el = document.createElement("div"); //Creating div to place the ball
@@ -21,22 +10,77 @@ function drawBall(x, y) {
   console.log("hello");
 }
 
-const ball = { x: 10, y: 10, dx: 10, dy: 10 };
+quantity= parseInt(prompt('Enter the number of balls you want:'));
+const balls=[{}];
+for (let i = 0; i < quantity; i++) {
+  const ball = createBall();
+  balls.push(ball);
+  console.log(ball);
+  drawBall(ball.x, ball.y);
+  setInterval(function() {
+    moveBall(ball);
+  }, 10);
+}
+
 //For the ball to move around
-function moveBall(x, y) {
+function moveBall(ball) {
   const mainContainer = document.getElementById("main-container");
   ball.x = ball.x + ball.dx;
   ball.y = ball.y + ball.dy;
   mainContainer.removeChild(document.querySelector(".ball"));
   drawBall(ball.x, ball.y);
   console.log("move");
-
-  if (ball.x + 21 > mainContainer.offsetWidth || ball.x < 1) {
+  collision(balls);
+  if (ball.x + 22 > mainContainer.offsetWidth || ball.x < 2) {
     ball.dx *= -1;
   }
-  if (ball.y +21> mainContainer.offsetHeight || ball.y < 1) {
+  if (ball.y +22> mainContainer.offsetHeight || ball.y < 2) {
     ball.dy *= -1;
   }
 }
-drawBall(ball.x, ball.y);
-setInterval(moveBall, 1050);
+//Random Value for X direction
+function randomIntFromIntervalX() {
+  let minX = 0;
+  let maxX = mainContainer.offsetWidth;
+  let randomX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
+  return randomX;
+}
+//Random Value fro Y direction
+function randomIntFromIntevalY() {
+  let minY = 0;
+  let maxY = mainContainer.offsetHeight;
+  let randomY = Math.floor(Math.random() * (maxY - minY + 1) + minY);
+  return randomY;
+}
+
+//Creating ball with random value
+function createBall(){
+let ball = {};
+ball.x = randomIntFromIntervalX();
+ball.y = randomIntFromIntevalY();
+ball.dx = Math.random();
+ball.dy = Math.random();
+return ball;  
+};
+
+
+function collision(balls) {
+  for (let i = 0; i < balls.length; i++) {
+    for (let j = i + 1; j < balls.length; j++) {
+      const ball1 = balls[i];
+      const ball2 = balls[j];
+      
+      const dx = ball2.x - ball1.x;
+      const dy = ball2.y - ball1.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < 20) { 
+        // Reverse the direction of both balls
+        ball1.dx *= -1;
+        ball1.dy *= -1;
+        ball2.dx *= -1;
+        ball2.dy *= -1;
+      }
+    }
+  }
+}

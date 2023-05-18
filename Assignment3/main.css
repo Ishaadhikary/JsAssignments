@@ -29,7 +29,8 @@ body{
 }
 
 .ball{
-    background: rgb(225, 3, 3);
+    /* background: rgb(225, 3, 3); */
+    background-image: url('../Assignment4/assets/image/antNormal.svg');
     width: 20px;
     height: 20px;
     border-radius: 50%;

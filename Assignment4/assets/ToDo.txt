@@ -1,0 +1,15 @@
+// Create Ant
+    // Change Ant Size
+//When ant collide 
+// Change ant direction:
+
+    //Change Img
+//When hover over ant: cursor = hammer
+//OnClicking ant: kill them
+    // Remove ant
+    //Add to the score board
+//You win 
+//*You loose: if time is up* --Additional
+
+
+

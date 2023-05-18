@@ -56,24 +56,24 @@ class BouncingBallGame {
       console.log("move");
       this.collision();//to Check the collision between the balls
       //To check the collision on the container wall
-      if (ball.x+19> this.mainContainer.offsetWidth || ball.x < 0) {
+      if (ball.x+21> this.mainContainer.offsetWidth || ball.x < 0) {
         ball.dx *= -1;
       }
-      if (ball.y+19>this.mainContainer.offsetHeight || ball.y < 0) {
+      if (ball.y+21>this.mainContainer.offsetHeight || ball.y < 0) {
         ball.dy *= -1;
       }
     }
   //Random Values for x
   randomIntFromIntervalX() {
     let minX = 0;
-    let maxX = this.mainContainer.offsetWidth - 2;
+    let maxX = this.mainContainer.offsetWidth - 20;
     return Math.floor(Math.random() * (maxX - minX + 1) + minX);
   }
   
   //Random Values for y
   randomIntFromIntevalY() {
     let minY = 0;
-    let maxY = this.mainContainer.offsetHeight - 2;
+    let maxY = this.mainContainer.offsetHeight - 20;
     return Math.floor(Math.random() * (maxY - minY + 1) + minY);
   }
   

@@ -35,7 +35,8 @@ class BouncingBallGame {
         this.drawBall(ball.x, ball.y);
         ball.intervalId = setInterval(() => {
           this.moveBall(ball);
-        }, 50);
+        }, this.intervalId);
+
       }
     }
   //Drawing the ball
@@ -48,10 +49,9 @@ class BouncingBallGame {
     var green = Math.floor(Math.random() * 256);
     var blue = Math.floor(Math.random() * 256);
     var randomColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
-
     ball_el.style.background=randomColor;
     this.mainContainer.appendChild(ball_el);
-    console.log("hello");
+    // console.log("hello");
   }
   //For Moving the ball
   moveBall(ball) {
@@ -59,7 +59,7 @@ class BouncingBallGame {
       ball.y = ball.y + ball.dy;
       this.mainContainer.removeChild(document.querySelector(".ball"));//To remove the previous ball
       this.drawBall(ball.x, ball.y);
-      console.log("move");
+      // console.log("move");
       this.collision();//to Check the collision between the balls
       //To check the collision on the container wall
       if (ball.x+21> this.mainContainer.offsetWidth || ball.x < 0) {
@@ -68,6 +68,7 @@ class BouncingBallGame {
       if (ball.y+21>this.mainContainer.offsetHeight || ball.y < 0) {
         ball.dy *= -1;
       }
+      
     }
   //Random Values for x
   randomIntFromIntervalX() {
@@ -93,7 +94,7 @@ class BouncingBallGame {
         const dy = ball2.y - ball1.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
       
-        if (distance < 20) { 
+        if (distance < 19) { 
           // Reverse the direction of both balls
           ball1.dx *= -1;
           ball1.dy *= -1;

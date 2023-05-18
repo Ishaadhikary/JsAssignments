@@ -44,6 +44,12 @@ class BouncingBallGame {
     ball_el.classList.add("ball");
     ball_el.style.left = x + "px";
     ball_el.style.bottom = y + "px";
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+    var randomColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+
+    ball_el.style.background=randomColor;
     this.mainContainer.appendChild(ball_el);
     console.log("hello");
   }

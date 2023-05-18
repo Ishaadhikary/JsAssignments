@@ -35,7 +35,7 @@ class BouncingBallGame {
         this.drawBall(ball.x, ball.y);
         ball.intervalId = setInterval(() => {
           this.moveBall(ball);
-        }, 5);
+        }, 50);
       }
     }
   //Drawing the ball
@@ -87,7 +87,7 @@ class BouncingBallGame {
         const dy = ball2.y - ball1.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
       
-        if (distance < 19) { 
+        if (distance < 20) { 
           // Reverse the direction of both balls
           ball1.dx *= -1;
           ball1.dy *= -1;

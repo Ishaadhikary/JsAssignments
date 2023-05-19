@@ -58,13 +58,15 @@ class AntCrushingGame {
 
     const removeAnt = () => {
       
+    // const ant1Id = document.getElementById(ant_el.id);
+    // ant1Id.style.background="url('bloodkill.svg')"
       console.log("Ant clicked");
-      console.log(ant_el)
+      
       this.mainContainer.removeChild(ant_el);
       this.scoreboard();
     };
 
-    ant_el.addEventListener("mousedown", removeAnt);
+    ant_el.addEventListener("click", removeAnt);
   }
 
   moveAnt(ant) {
@@ -122,10 +124,6 @@ class AntCrushingGame {
           if (ant1.dx< 0 || ant1.dy < 0){
             const ant1Id = document.getElementById(ant1.id);
             ant1Id.style.transform = "rotate(180deg)";
-          }
-          if (ant2.dx< 0 || ant2.dy < 0){
-            const ant2Id = document.getElementById(ant2.id);
-            ant2Id.style.transform = "rotate(180deg)";
           }
         }
       }

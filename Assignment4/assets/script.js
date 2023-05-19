@@ -42,7 +42,7 @@ class AntCrushingGame {
       this.drawAnt(ant);
       const intervalId = setInterval(() => {
         this.moveAnt(ant);
-      }, 1000);
+      }, 100);
       this.intervalIds.push(intervalId); // Store interval ID
     }
   }
@@ -57,15 +57,13 @@ class AntCrushingGame {
     this.mainContainer.appendChild(ant_el);
 
     const removeAnt = () => {
-      console.log("Ant clicked");
-      this.mainContainer.removeChild(ant_el);
       
-      // ant_el.style.backgroundImage = `url(${bloodKill.svg})`
-      // setTimeout(() => {
-      //   ant_el.style.display = "none"; // Hide the image
-      // }, 3000);
-      // // setTimeout(ant_el.style.backgroundImage = `url(${bloodKill.svg})`,10)
-      this.scoreboard()
+    // const ant1Id = document.getElementById(ant_el.id);
+    // ant1Id.style.background="url('bloodkill.svg')"
+      console.log("Ant clicked");
+      
+      this.mainContainer.removeChild(ant_el);
+      this.scoreboard();
     };
 
     ant_el.addEventListener("click", removeAnt);
@@ -123,9 +121,11 @@ class AntCrushingGame {
           ant1.dy *= -1;
           ant2.dx *= -1;
           ant2.dy *= -1;
-          // ant1.style.background-image =  `url(assets/)`
+          if (ant1.dx< 0 || ant1.dy < 0){
+            const ant1Id = document.getElementById(ant1.id);
+            ant1Id.style.transform = "rotate(180deg)";
+          }
         }
-        // ant1.style.background= 'red';
       }
     }
     // console.log('Collision');
@@ -143,12 +143,16 @@ class AntCrushingGame {
         this.sideContainer.appendChild(heading);
       }
     
-      // Update the text content of the existing heading with the updated score
+      // Update score
       heading.innerText = "Score: " + score;
       
       if(score === 20){
         heading.innerText = "GAME OVER ";
         alert("Congratulation you won!");
+        Object.assign(this.mainContainer.style, {
+          background: `url("bloodKill.svg") no-repeat center`,
+          backgroundSize: "300px",
+        });
       }
     }
   

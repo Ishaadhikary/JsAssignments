@@ -36,13 +36,13 @@ class AntCrushingGame {
       this.ants.push(ant);
     }
   }
-
+//Start the game
   startGame() {
     for (const ant of this.ants) {
       this.drawAnt(ant);
       const intervalId = setInterval(() => {
         this.moveAnt(ant);
-      }, 100);
+      }, 100);//From moving the ant
       this.intervalIds.push(intervalId); // Store interval ID
     }
   }
@@ -55,9 +55,8 @@ class AntCrushingGame {
     ant_el.style.left = ant.x + "px";
     ant_el.style.bottom = ant.y + "px";
     this.mainContainer.appendChild(ant_el);
-
-    const removeAnt = () => {
-      
+//Removing the clicked ant
+    const removeAnt = () => { 
       console.log("Ant clicked");
       console.log(ant_el)
       this.mainContainer.removeChild(ant_el);
@@ -66,14 +65,14 @@ class AntCrushingGame {
 
     ant_el.addEventListener("mousedown", removeAnt);
   }
-
+//Moving the ant
   moveAnt(ant) {
     const previousAnt = document.getElementById(ant.id);
     ant.x = ant.x + ant.dx;
     ant.y = ant.y + ant.dy;
     this.mainContainer.removeChild(previousAnt);
     this.drawAnt(ant);
-
+//Checking the collision with the Container
     if (
       ant.x + WIDTH > this.mainContainer.offsetWidth ||
       ant.x < 0 ||
@@ -83,10 +82,10 @@ class AntCrushingGame {
       ant.dx *= -1;
       ant.dy *= -1;
     }
-
+//Check the collision between ants
     this.collision();
   }
-
+//Generating the random values
   randomIntFromIntervalX() {
     let minX = 0;
     let maxX = this.mainContainer.offsetWidth - WIDTH;
@@ -98,16 +97,13 @@ class AntCrushingGame {
     let maxY = this.mainContainer.offsetHeight - HEIGHT;
     return Math.floor(Math.random() * (maxY - minY + 1) + minY);
   }
+
+//Collison of Ant checking function
   collision() {
     for (let i = 0; i < this.ants.length; i++) {
       for (let j = i + 1; j < this.ants.length; j++) {
         const ant1 = this.ants[i];
         const ant2 = this.ants[j];
-
-        var rad1 = Math.atan2(ant1.y, ant1.x); //Direction of the ball
-
-        var dir2 = Math.atan2(ant2.y, ant2.x);
-        var degree1 = rad1 * (180 / Math.PI);
 
         const dx = ant2.x - ant1.x;
         const dy = ant2.y - ant1.y;
@@ -119,6 +115,7 @@ class AntCrushingGame {
           ant1.dy *= -1;
           ant2.dx *= -1;
           ant2.dy *= -1;
+          //Rotating the ant
           if (ant1.dx< 0 || ant1.dy < 0){
             const ant1Id = document.getElementById(ant1.id);
             ant1Id.style.transform = "rotate(180deg)";

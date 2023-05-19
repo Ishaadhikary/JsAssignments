@@ -42,7 +42,7 @@ class AntCrushingGame {
       this.drawAnt(ant);
       const intervalId = setInterval(() => {
         this.moveAnt(ant);
-      }, 100); //From moving the ant
+      }, 10); //From moving the ant
       this.intervalIds.push(intervalId); // Store interval ID
     }
   }

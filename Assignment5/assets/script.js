@@ -1,3 +1,4 @@
+const mainContainer = document.getElementById("main-container");
 startGame = () => {
   const mainContainer = document.getElementById("main-container");
   mainContainer.innerHTML=" ";
@@ -149,9 +150,9 @@ startGame = () => {
     const startBut = document.createElement("button");
     startBut.id = "startButton";
     gameRestart.appendChild(startBut);
-    startBut.innerText = "START";
+    startBut.innerText = "Pause";
     startBut.style.fontSize = "18px";
-    gameRestart.addEventListener("click", () => console.log("Game Started"));
+    gameRestart.addEventListener("click", () => console.log("Pause Feature"));
   };
   startButton();
   function stopGame() {
@@ -195,17 +196,18 @@ startGame = () => {
   mainContainer.append(updateSection);
 };
 
-// initialGame= ()=>{
-//   const initialBox = document.createElement('div');
-//   initialBox.id = "initialBox"
-//   initialBox.innerHTM = "Do you want to play the game?"
-//   const initialstartButton = document.createElement("button")
-//   initialstartButton.id = 'initialstartButton'
-//   initialBox.append(initialstartButton);
-//   initialstartButton.addEventListener("click", () => startGame());
+initialGame= ()=>{
+  const initialBox = document.createElement('div');
+  mainContainer.append(initialBox);
+  initialBox.id = "initialBox"
+  initialBox.innerHTM = "Do you want to play the game?"
+  const initialstartButton = document.createElement("button")
+  initialstartButton.id = 'initialstartButton'
+  initialBox.append(initialstartButton);
+  initialstartButton.addEventListener("click", () => startGame());
 
-// }
+}
 
-// initialGame()
-startGame()
+initialGame()
+// startGame()
 

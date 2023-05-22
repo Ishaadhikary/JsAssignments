@@ -200,9 +200,10 @@ initialGame= ()=>{
   const initialBox = document.createElement('div');
   mainContainer.append(initialBox);
   initialBox.id = "initialBox"
-  initialBox.innerHTM = "Do you want to play the game?"
   const initialstartButton = document.createElement("button")
   initialstartButton.id = 'initialstartButton'
+  initialstartButton.innerText = "START";
+  initialstartButton.style.margin="20"+ '%'
   initialBox.append(initialstartButton);
   initialstartButton.addEventListener("click", () => startGame());
 

@@ -60,7 +60,7 @@ border: none;
 #centerLane{
   position: absolute;
   z-index: 1;
-  background: rgba(238, 238, 28, 0.549);
+  background: rgba(244, 244, 236, 0.549);
   width: 25%;
   height: 100%;
   top:0;
@@ -81,7 +81,7 @@ border: none;
 #rightLane{
   position: absolute;
   z-index: 1;
-  background: rgba(238, 28, 28, 0.549);
+  background: rgba(244, 244, 236, 0.549);
   width: 25%;
   height: 100%;
   top:0;

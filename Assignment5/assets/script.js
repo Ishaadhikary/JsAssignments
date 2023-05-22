@@ -85,6 +85,7 @@ startGame = () => {
   //ID to store animation frame
   let animationFrame;
   //Setting the speed of the car
+  
   const moveCar = (car, topPosition) => {
     // Initialing the position of the cars for checking collision
     let initial1 = 0.5 + i * 0.05;

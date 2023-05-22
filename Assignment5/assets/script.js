@@ -1,7 +1,8 @@
 const mainContainer = document.getElementById("main-container");
 startGame = () => {
   const mainContainer = document.getElementById("main-container");
-  mainContainer.innerHTML=" ";
+  
+  mainContainer.innerHTML="";
   // Creating a div for the road section of the game
   const roadSection = document.createElement("div");
   roadSection.id = "road-section";
@@ -24,7 +25,8 @@ startGame = () => {
   window.addEventListener("keydown", (e) => {
     switch (e.code) {
       case "ArrowLeft":
-        if (userCar.style.left <= "75%" && userCar.style.left > "25%") {
+        console.log("LeftArrow")
+        if (userCar.style.left <="75%" && userCar.style.left>="25%") {
           console.log(userCar.style.left);
           moveLeft();
         }
@@ -87,7 +89,7 @@ startGame = () => {
   let animationFrame;
   //Setting the speed of the car
   
-  const moveCar = (car, topPosition) => {
+  const moveCar = (car, topPosition,userCarInfo) => {
     // Initialing the position of the cars for checking collision
     let initial1 = 0.5 + i * 0.05;
     let initial2 = 0.2 + i * 0.05;
@@ -110,6 +112,9 @@ startGame = () => {
       setTimeout(() => moveCar(car, 0), 0);
       countScore();
       i++;
+      if(i>5 && i % 5 ==0){
+        car=car1?moveRight(car1):moveLeft(car2)
+      }
     }
   };
 
@@ -118,8 +123,9 @@ startGame = () => {
   // car2.style.top = "0%";
   // car1.style.left = "25%";
   // car2.style.left = "75%";
-  moveCar(car1, 0);
-  moveCar(car2, 0);
+  const userCarInfo =userCar.style
+  moveCar(car1, 0, userCarInfo);
+  moveCar(car2, 0, userCarInfo);
 
   // Creating a div for the Game Update section of the game
   const updateSection = document.createElement("div");
@@ -156,9 +162,8 @@ startGame = () => {
   };
   startButton();
   function stopGame() {
-    cancelAnimationFrame(animationFrame); // Replace `animationFrameId` with the actual variable storing the request ID
-  
-    // Remove event listeners
+    cancelAnimationFrame(animationFrame); 
+        // Remove event listeners
     window.removeEventListener("keydown", moveLeft);
     window.removeEventListener("keydown", moveRight);
   
@@ -181,7 +186,7 @@ startGame = () => {
     restartButton.innerText = "RESTART";
     restartButton.style.fontSize = "18px";
     
-    restartButton.addEventListener("click", () => startGame());
+    restartButton.addEventListener("click", () => window.location.reload());
   
     gameRestart.innerHTML = ""; // Clear the game restart section
     roadSection.appendChild(gameOverMessageBox);

@@ -156,7 +156,7 @@ startGame = () => {
   };
   startButton();
   function stopGame() {
-    cancelAnimationFrame(animationFrame); // Replace `animationFrameId` with the actual variable storing the request ID
+    cancelAnimationFrame(animationFrame);
   
     // Remove event listeners
     window.removeEventListener("keydown", moveLeft);

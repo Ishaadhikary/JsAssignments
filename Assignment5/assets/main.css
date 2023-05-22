@@ -1,0 +1,185 @@
+@font-face {
+  font-family: scoreboard;
+  src: url('font.ttf');
+}
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+border: none;
+}
+
+#main-container{
+    width:100vw;
+    background:white;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+#road-section{
+    position: relative;
+    background-image: url('images/main.svg') ;
+    width: 70%;
+    height: 100%;
+    background-size: cover;
+    /* overflow: hidden; */
+    background-position: 0px;
+    animation: bgmove 20s infinite;
+    top:0;
+    z-index: 0;
+
+    /* background-repeat: no-repeat; */
+}
+@keyframes bgmove {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 3243px;
+    top:-1px;
+  }
+
+}
+
+
+#leftLane{
+    position: absolute;
+    z-index: 1;
+    background: rgba(244, 244, 236, 0.549);
+    width: 25%;
+    height: 100%;
+    top:0;
+    left: 22.7%;
+}
+
+#centerLane{
+  position: absolute;
+  z-index: 1;
+  background: rgba(238, 238, 28, 0.549);
+  width: 25%;
+  height: 100%;
+  top:0;
+  left: 48%;
+}
+
+#userCar{
+  position: absolute;
+  z-index: 2;
+  background-image: url('images/Car.svg');
+  width: 178px;
+  height: 183px;
+  bottom:0%;
+  left: 51.5%;
+  top:74%
+}
+
+#rightLane{
+  position: absolute;
+  z-index: 1;
+  background: rgba(238, 28, 28, 0.549);
+  width: 25%;
+  height: 100%;
+  top:0;
+  left: 73.5%;
+
+}
+
+#car1{
+  position:absolute;
+  z-index: 2;
+  background-image: url('images/car1.svg');
+  width: 178px;
+  height: 178px;
+  top:1%;
+  left: 29%;
+  background-repeat: no-repeat;
+}
+
+#car2{
+  position:absolute;
+  z-index: 2;
+  background-image: url('images/car2.svg');
+  width: 178px;
+  height: 178px;
+  top:1%;
+  left: 79%;
+  background-repeat: no-repeat;
+  }
+#updateSection{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  height: 80%;
+  margin-right: 20px;
+  gap: 20px;
+
+}
+#scoreboard{
+  height: 40%;
+  background: rgba(12, 8, 0, 0.81);
+  border: 11px double white;
+  font-family: scoreboard; 
+
+}
+
+#gameRestart{
+  height: 40%;
+  align-self: center;
+  
+}
+
+h1{
+  text-align: center;
+  color: rgb(251, 2, 2);
+  padding: 20px;
+  letter-spacing: 3px;
+}
+
+#startButton, #restartButton, #initialstartButton{
+  width: 100px;
+  height: 40px;
+  background: rgb(7, 102, 0);
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  border: none;
+}
+
+
+#carCrash{
+  position: absolute;
+  z-index: 3;
+  width: 120px;
+  height: 120px;
+  background-image: url(images/carCrash.svg);
+  background-repeat: no-repeat;
+}
+
+#gameOverMessageBox, #initialBox{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  align-items: center;
+  gap:20%;
+  z-index: 3;
+  width: 500px;
+  height: 300px;
+  margin:25% 35%;
+  text-align: center;
+  font-size: 40px;
+  padding: 20px;
+  border: 11px double white;
+  background-color:#656574;
+  color: white;
+    box-shadow:2px 2px 13px 12px rgba(0, 0, 0, 0.3);
+}
+#restartButton{
+  background:yellowgreen;
+  box-shadow:  2px 17px 6px rgba(0, 0, 0, 0.3);
+}

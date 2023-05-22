@@ -114,10 +114,10 @@ startGame = () => {
   };
 
   let i = 0;
-  car1.style.top = "0%";
-  car2.style.top = "0%";
-  car1.style.left = "25%";
-  car2.style.left = "75%";
+  // car1.style.top = "0%";
+  // car2.style.top = "0%";
+  // car1.style.left = "25%";
+  // car2.style.left = "75%";
   moveCar(car1, 0);
   moveCar(car2, 0);
 

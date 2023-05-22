@@ -162,8 +162,8 @@ startGame = () => {
   };
   startButton();
   function stopGame() {
-    cancelAnimationFrame(animationFrame); 
-        // Remove event listeners
+    cancelAnimationFrame(animationFrame);
+    // Remove event listeners
     window.removeEventListener("keydown", moveLeft);
     window.removeEventListener("keydown", moveRight);
   

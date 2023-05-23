@@ -58,6 +58,8 @@ class FlappyBirdGame {
       this.bottomPillar = document.createElement("img");
       this.bottomPillar.src = this.bottomPillars[i];
       this.topPillar.src = this.topPillars[i];
+      this.topPillar.alt = "Pillar Img"
+      this.bottomPillar.alt = "Pillar Img"
       this.topPillar.style.position = "absolute";
       this.bottomPillar.style.position = "absolute";
       this.topPillar.style.top = 0;
@@ -79,10 +81,12 @@ class FlappyBirdGame {
   flappyBirdFly() {
     //To check if space bar is pressed
     this.movingBird()
+    
   }
 
-  
-    movingBird(){let flag = false;
+  //TO move the flappy bird
+    movingBird(){
+    let flag = false;
     document.addEventListener("keydown", (e) => {
       if (e.code === 'Space') {
         flag = true; //
@@ -94,21 +98,22 @@ class FlappyBirdGame {
       if (flag) {
         this.flappyBirdY = parseFloat(this.flappyBirdY) - parseFloat(this.gravity);
       this.flappyBird.style.top = this.flappyBirdY + "px";
+      this.checkCollision()
       // this.flappyBird.style.transform="rotate(180deg)"
       }
       //Move Flappy bird down
        else {
         this.flappyBirdY = parseFloat(this.flappyBirdY) + parseFloat(this.gravity);
       this.flappyBird.style.top = this.flappyBirdY + "px";
+      this.checkCollision()
       }
       
       flag = false; // Reset the flag 
     }, 300);}
-    
-   
 
-    
-  
+    checkCollision(){
+      console.log("Collision Function here")
+    }
   
 
   //Moving the pillars

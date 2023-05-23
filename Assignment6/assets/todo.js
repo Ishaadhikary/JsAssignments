@@ -22,15 +22,19 @@
 //To Do:
     //Monday:
         //Office:
-            // Background Image animation[]
-            //Pillar Animation []
-            //Bird Animation[]
-            //Pillar and bird collision logic[]
-            //Bird Rotation logic[]
+            // Background Image animation[Done]
+            //Pillar Animation [Done]
+            //Bird Animation[Done]
+            //Pillar and bird collision logic[Thinking]
+            //Bird Rotation logic[Thinking]
             //Stoing score Logic[]
         //Home:
-            //Initial Page Design[]
-            //End Page Components Design[]
-            //Game Page Design[]    
-
+            //Initial Page Design[Done]
+            //End Page Components Design[Done]
+            //Game Page Design[Done]    
+    //Tuesday:
+        //Office:
+            //Complete the mondays remaing work
+            //Implement the pillar and bird collision
+            //Add score
 //Pillar Generation

@@ -1,23 +1,36 @@
+var self = this; // Store reference to 'this'
 class FlappyBirdGame {
   constructor() {
     this.container = document.getElementById("container");
     this.instruction = document.querySelector(".instruction");
-    this.playButton = document.querySelector(".playButton");
+    this.playButton = document.getElementById("playButton");
+    
+    this.flappyBird = document.createElement("div");
+    this.flappyBird.id = "flappyBird";
+    this.container.appendChild(this.flappyBird);
+    this.flappyBirdY = this.flappyBird.style.top;
+    this.flappyBird.style.top = 400 +"px";//Initialize the top for the bird
+    this.flappyBirdY = this.flappyBird.style.top;
+
+    
+    this.gravity = 9.8 + "px";
+    
     this.topPillars = []; //Add all the top pillars to the array
     this.bottomPillars = []; //Add all the bottom pillars to the array
     this.topPillar = null;
-    this.bottomPillar=null;
+    this.bottomPillar = null;
+    this.collisionPillarLeft = 600+"px";
   }
   init() {
-    console.log("Test")
     this.createPillars();
-    this.initializeGame(); 
     requestAnimationFrame(this.animatePillars.bind(this));
+    
     // this.startGame();
     // this.endGame();
   }
   createPillars() {
     console.log("Creation of pillars");
+    console.log(this.flappyBird)
     //Adding all the top pillars to the Array
     this.topPillars.push("assets/images/Pillar1Top.svg");
     this.topPillars.push("assets/images/pillar2Top.svg");
@@ -39,7 +52,7 @@ class FlappyBirdGame {
     this.bottomPillars.push("assets/images/pillar8Bottom.svg");
     let currentPosition = 0;
 
-    //Adding all the bottom pillars to the Array
+    //Adding all the  pillars to the Document
     for (let i = 0; i < 8; i++) {
       this.topPillar = document.createElement("img");
       this.bottomPillar = document.createElement("img");
@@ -51,24 +64,76 @@ class FlappyBirdGame {
       this.bottomPillar.style.bottom = 95 + "px";
       this.topPillar.style.left = currentPosition + "px";
       this.bottomPillar.style.left = currentPosition + "px";
-      currentPosition+=248;
+      currentPosition += 248;
       this.container.append(this.topPillar);
-      this.container.append(this.bottomPillar)
+      this.container.append(this.bottomPillar);
     }
-
+    addEventListener("click", () => this.initializeGame());
   }
   initializeGame() {
-    console.log("Initial Page here");
+    console.log("Welcome to initial part of the game");
+    this.container.removeChild(this.instruction);
+    this.flappyBirdFly();
   }
+
+  flappyBirdFly() {
+    //To check if space bar is pressed
+    this.movingBird()
+  }
+
+  
+    movingBird(){let flag = false;
+    document.addEventListener("keydown", (e) => {
+      if (e.code === 'Space') {
+        flag = true; //
+      }
+    });
+    
+    setInterval(() => {
+      //Move flappy bird up
+      if (flag) {
+        this.flappyBirdY = parseFloat(this.flappyBirdY) - parseFloat(this.gravity);
+      this.flappyBird.style.top = this.flappyBirdY + "px";
+      // this.flappyBird.style.transform="rotate(180deg)"
+      }
+      //Move Flappy bird down
+       else {
+        this.flappyBirdY = parseFloat(this.flappyBirdY) + parseFloat(this.gravity);
+      this.flappyBird.style.top = this.flappyBirdY + "px";
+      }
+      
+      flag = false; // Reset the flag 
+    }, 300);}
+    
+   
+
+    
+  
+  
+
+  //Moving the pillars
   animatePillars() {
     const pillars = this.container.querySelectorAll("img");
     pillars.forEach((pillar) => {
-      const left = parseInt(pillar.style.left);
-      pillar.style.left = left - 1 + "px"; 
+      let left = parseInt(pillar.style.left);
+      if (left > 0) {
+        //Decresing the pillar to the left
+        pillar.style.left = left - 1 + "px";
+      } else {
+        pillar.style.left = left - 1 + "px"; 
+        //Reseting the pipe so that when pipe is generated in loop it maintains the spacing
+        if (left <= -248) {
+          let randomIndex = Math.floor(Math.random() * this.topPillars.length);
+          pillar.src === this.Toppillar
+            ? this.topPillars[randomIndex]
+            : this.bottomPillars[randomIndex];
+          pillar.style.left = left + 248 * 8 + "px";
+        }
+      }
     });
     requestAnimationFrame(this.animatePillars.bind(this));
-    
   }
 }
+
 const flappyBird = new FlappyBirdGame();
 flappyBird.init();

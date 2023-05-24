@@ -15,7 +15,7 @@ body{
 
 @font-face {
     font-family: flappyBirdFont;
-    src: url('FlappyBirdy.ttf');
+    src: url('assets/FlappyBirdy.ttf');
 }
 #container{
     position: relative;

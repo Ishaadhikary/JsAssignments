@@ -4,10 +4,18 @@
     box-sizing: border-box;
 }
 
+
 body{
     margin: 0;
     width: 100vw;
     height: 100vh;
+    font-family: flappyBirdFont;
+    font-size: 50px;
+}
+
+@font-face {
+    font-family: flappyBirdFont;
+    src: url('FlappyBirdy.ttf');
 }
 #container{
     position: relative;
@@ -19,27 +27,41 @@ body{
     height: 100vh;
     z-index: -2;
 }
-.instruction{
-    display: block;
+.instruction, #gameOverBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background:#DED996;
+    gap: 20px;
     height: 200px;
     width: 500px;
-    border: 5px solid black;
+    border: 5px double black;
     border-radius: 4px;
     position: absolute;
     z-index: 1;
     left:35%;
     top: 35%;
+    text-align: center;
 }
-/* 
-#playButton{
-    width:50px;
-    height:50px;
-    border: 2px solid black;
-    border-radius: 50%;
-    background: red;
+
+.instruction h1{
+    font-family: flappyBirdFont;
+    font-size: 80px;
+}
+
+#restart{
+    width:120px;
+    height:45px;
+    border: none;
+    border-radius: 8px;
+    background: rgb(25, 159, 2);
     display: block;
-} */
+    font-size: 30px;
+    /* font-family: flappyBirdFont; */
+    color:#DED996;
+    font-weight: bolder;
+} 
 
 #flappyBird{
     position:absolute;
@@ -48,6 +70,7 @@ body{
     width:100%;
     height: 100%;
     background-repeat: no-repeat;
+    transform-origin: center center;
     animation: flappy 1s infinite;
 }
 

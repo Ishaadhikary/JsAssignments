@@ -3,7 +3,6 @@ class FlappyBirdGame {
   constructor() {
     this.container = document.getElementById("container");
     this.instruction = document.querySelector(".instruction");
-    this.scoreBoard = document.getElementById("scoreBoard");
     this.playButton = document.getElementById("playButton");
 
     this.flappyBird = document.createElement("div");
@@ -20,21 +19,14 @@ class FlappyBirdGame {
     this.topPillar = null;
     this.bottomPillar = null;
     this.collisionPillarLeft = 600 + "px";
-    this.score=0;
-    this.highScore=0;
-
-    this.pillars===this.topPillars?this.topPillars:this.bottomPillars
-
+    // this.score=score;
   }
   init() {
     this.createPillars();
     requestAnimationFrame(this.animatePillars.bind(this));
-
-    // this.startGame();
-    // this.endGame();
+    // this.checkCollision();
   }
   createPillars() {
-    this.score = 0
     console.log("Creation of pillars");
     console.log(this.flappyBird);
     //Adding all the top pillars to the Array
@@ -54,11 +46,11 @@ class FlappyBirdGame {
     this.bottomPillars.push("assets/images/pillar4Bottom.svg");
     this.bottomPillars.push("assets/images/pillar5Bottom.svg");
     this.bottomPillars.push("assets/images/pillar6Bottom.svg");
-    this.bottomPillars.push("assets/images/pillar7Buttom.svg");
+    this.bottomPillars.push("assets/images/pillar7Bottom.svg");
     this.bottomPillars.push("assets/images/pillar8Bottom.svg");
     let currentPosition = 0;
 
-    //Adding all the  pillars to the Document
+    //Adding all the pillars to the Document
     for (let i = 0; i < 8; i++) {
       this.topPillar = document.createElement("img");
       this.bottomPillar = document.createElement("img");
@@ -82,7 +74,7 @@ class FlappyBirdGame {
     console.log("Welcome to initial part of the game");
     this.container.removeChild(this.instruction);
     this.flappyBirdFly();
-    // this.gameOver();
+    this.checkCollision();
   }
 
   flappyBirdFly() {
@@ -115,74 +107,38 @@ class FlappyBirdGame {
 
       flag = false; // Reset the flag
     }, 300);
-    setInterval(this.checkCollision(), 300)
+    // this.checkCollision();
   }
 
   checkCollision() {
-    this.topPillars.forEach((pillar) => {
-      if (pillar === this.topPillar) {
-        if (
-          parseFloat(this.pillar.style.bottom) > parseFloat(this.flappyBird.style.top) &&
-          this.flappyBird.style.left === this.topPillar.style.left
-        ) {
-          this.gameOver();
-          console.log("Collision")
-        } else if (
-          this.flappyBird.style.left === this.topPillar.style.left &&
-          parseFloat(this.flappyBird.style.top) < parseFloat(this.topPillar.style.bottom)
-        ) {
-          console.log("No collision")
-          this.scoreBoard();
-        }
+    const flappyBirdTop = parseInt(this.flappyBird.style.top);
+    const flappyBirdBottom = flappyBirdTop + this.flappyBird.clientHeight;
+
+    for (let i = 0; i < this.topPillars.length; i++) {
+      const topPillarLeft = parseInt(this.topPillars[i].style.left);
+      const topPillarRight = topPillarLeft + this.topPillars[i].clientWidth;
+      const topPillarHeight = this.topPillars[i].clientHeight;
+
+      const bottomPillarLeft = parseInt(this.bottomPillars[i].style.left);
+      const bottomPillarRight =
+        bottomPillarLeft + this.bottomPillars[i].clientWidth;
+      const bottomPillarTop = parseInt(this.bottomPillars[i].style.bottom);
+
+      if (
+        flappyBirdBottom > topPillarHeight &&
+        flappyBirdTop < bottomPillarTop &&
+        this.flappyBird.getBoundingClientRect().right > topPillarLeft &&
+        this.flappyBird.getBoundingClientRect().left < topPillarRight &&
+        (this.flappyBird.getBoundingClientRect().right > bottomPillarLeft ||
+          this.flappyBird.getBoundingClientRect().left < bottomPillarRight)
+      ) {
+        console.log("Collision Occurred");
+        return;
       }
-    });
-  
-    this.bottomPillars.forEach((pillar) => {
-      if (pillar === this.bottomPillar) {
-        if (
-          parseFloat(this.pillar.style.top) > parseFloat(this.flappyBird.style.top) &&
-          this.flappyBird.style.left === this.bottomPillar.style.left
-        ) {
-          this.gameOver();
-        } else if (
-          this.flappyBird.style.left === this.bottomPillar.style.left &&
-          parseFloat(this.flappyBird.style.top) > parseFloat(this.bottomPillar.style.top)
-        ) {
-          this.scoreBoard();
-        }
-      }
-    });
-  }
-  
-  
-  scoreCounter() {
-    console.log(this.score);
-    this.score++;
-    let heading = this.scoreBoard.querySelector("h1");
-    
-    if (!heading) {
-      // Create the <h1> element if it doesn't exist
-      heading = document.createElement("h1");
-      this.scoreBoard.appendChild(heading);
     }
 
-    // Update score
-    heading.innerText = "Score: " + score;
-
+    console.log("No Collision");
   }
-
-  gameOver(){
-    this.gameOverBox = document.createElement("div")
-    this.gameOverBox.id = "gameOverBox"
-    this.gameOverBox.innerHTML= "Game Over"+"<br>"+"PlayAgain"
-    this.restart = document.createElement("button")
-    this.restart.textContent = "Restart";
-    this.restart.id = "restart"
-    this.gameOverBox.appendChild(this.restart)
-    this.container.appendChild(this.gameOverBox)
-  }
-  
-  
 
   //Moving the pillars
   animatePillars() {
@@ -196,14 +152,14 @@ class FlappyBirdGame {
         pillar.style.left = left - 1 + "px";
         //Reseting the pipe so that when pipe is generated in loop it maintains the spacing
         if (left <= -248) {
-          this.randomIndex = Math.floor(Math.random() * 8);
-          if(pillar.src === this.topPillar) this.topPillars[randomIndex]
-          else if(pillar.src ==this.bottomPillar) this.bottomPillars[randomIndex];
+          let randomIndex = Math.floor(Math.random() * this.topPillars.length);
+          pillar.src = this.topPillars[randomIndex];
           pillar.style.left = left + 248 * 8 + "px";
         }
       }
     });
     requestAnimationFrame(this.animatePillars.bind(this));
+    
   }
 }
 
